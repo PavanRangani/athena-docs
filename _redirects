@@ -1,9 +1,9 @@
 # Redirect specific file to home
-/entity-models-index-styled.html  /  301
+/entity-models-index-styled.html  /  301!
 
-/entity-models-index-styled.html  /index.html  301
+/entity-models-index-styled.html  /index.html  301!
 
 # Redirect ALL unknown paths to home
 /*  /index.html  200
 
-https://693ae534d46c635dfa777b5neon-dieffenbachia-b63adb.netlify.app/* https://neon-dieffenbachia-b63adb.netlify.app/ 301
+https://693ae534d46c635dfa777b5neon-dieffenbachia-b63adb.netlify.app/* https://neon-dieffenbachia-b63adb.netlify.app/ 301!
