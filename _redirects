@@ -5,3 +5,5 @@
 
 # Redirect ALL unknown paths to home
 /*  /index.html  200
+
+/693ae534d46c635dfa777b5e--neon-dieffenbachia-b63adb.netlify.app/* /neon-dieffenbachia-b63adb.netlify.app/ 301
