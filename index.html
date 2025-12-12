@@ -1,9 +1,3 @@
-<script>
-if (location.hostname.includes('--neon-dieffenbachia-b63adb')) {
-  window.location.replace("https://neon-dieffenbachia-b63adb.netlify.app/");
-}
-</script>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -21,7 +15,7 @@ if (location.hostname.includes('--neon-dieffenbachia-b63adb')) {
   --table-head:#174b7a;
 }
 * { box-sizing: border-box; }
-body {
+body { overflow-x: hidden !important; 
   margin:0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background:var(--bg);
@@ -37,18 +31,8 @@ body.dark {
   --accent:#7aa7ff;
   --table-head:#0b2340;
 }
-.sidebar {
-  width:300px;
-  height:100vh;
-  overflow:auto;
-  background:var(--card);
-  border-right:1px solid rgba(0,0,0,0.06);
-  padding:22px;
-  position:fixed;
-  left:0;
-  top:0;
-}
-.sidebar h2 { margin:0 0 12px 0; font-size:18px; }
+
+
 #toc a {
   display:block;
   color:var(--accent);
@@ -56,10 +40,10 @@ body.dark {
   padding:6px 0;
   font-size:14px;
 }
-#toc a.sub { margin-left:12px; font-size:13px; color:var(--text); }
-#toc a.subsub { margin-left:22px; font-size:13px; color:var(--muted); }
+#toc a.sub { margin-left: 0; font-size:13px; color:var(--text); }
+#toc a.subsub { margin-left: 0; font-size:13px; color:var(--muted); }
 .content {
-  margin-left:320px;
+  margin-left: 0;
   padding:36px;
   max-width:1100px;
   width:100%;
@@ -103,8 +87,9 @@ body.dark th{ background:#123042; }
 a{ color:var(--accent); text-decoration:none; }
 a:hover{ text-decoration:underline; }
 @media (max-width:900px){
-  .sidebar{ display:none; }
-  .content{ margin:0; padding:18px; }
+  
+
+.content{ margin:0; padding:18px; }
 }
 
 /* Responsive tables */
@@ -124,15 +109,150 @@ table {
     overflow-x: auto;
     display: block;
 }
+
+/* Improvements: smooth theme transitions, sticky TOC, collapsible, back-to-top, print styles, table mobile */
+body { transition: background 240ms ease, color 240ms ease; }
+
+
+#site-search { background: var(--card); color: var(--text); }
+.toc-collapsible { cursor: pointer; display:flex; align-items:center; gap:8px; }
+.toc-collapsible .chev { width:12px; height:12px; display:inline-block; transition: transform 180ms ease; transform-origin: center; }
+.toc-collapsible.collapsed .chev { transform: rotate(-90deg); }
+.toc-list { list-style:none; padding-left:0; margin:8px 0; }
+.toc-list li { margin:4px 0; }
+.toc-list a { display:block; padding:6px 8px; border-radius:6px; }
+.toc-list a.active { background: rgba(22,102,214,0.08); color: var(--accent); font-weight:600; }
+#content-card { position:relative; }
+.back-to-top { position:fixed; right:20px; bottom:20px; padding:10px 12px; border-radius:999px; background:var(--accent); color:white; border:none; box-shadow:0 6px 20px rgba(16,24,40,0.12); cursor:pointer; z-index:999; display:none; }
+.theme-controls { display:flex; gap:8px; margin-top:10px; }
+.small-btn { padding:6px 8px; border-radius:8px; border:none; cursor:pointer; font-size:13px; }
+#print-btn { background:#ef4444; color:white; }
+.table-wrap { overflow:auto; -webkit-overflow-scrolling: touch; border-radius:8px; margin:10px 0; }
+table th { position: sticky; top:0; z-index:2; }
+/* Print */
+@media print {
+  body { background: white !important; color: #111 !important; }
+  .card { box-shadow:none !important; border-radius:0 !important; padding:0 !important; }
+  table { page-break-inside: avoid; }
+}
+/* Sepia mode */
+body.sepia { --bg: #fbf1e6; --card:#fff6eb; --text:#3b2f2f; --muted:#6b584e; --accent:#b7791f; --table-head:#623d1f; }
+
+
+/* Collapsible groups & icons */
+
+
+
+
+
+
+
+
+
+
+
+/* Search results / highlight */
+.content-mark { background: #fff59d; padding:0 2px; border-radius:2px; }
+.toc-hidden { display:none !important; }
+
+/* Sticky headers in sidebar already via toc-group-header position sticky */
+/* Improve scrollbar for sidebar */
+
+
+/* small responsive tweak */
+@media (max-width:900px){
+  
+
+}
+
+
+/* Resizable Sidebar */
+
+
+/* Smooth Theme Transitions */
+body, .card, /* Font Size Controls */
+:root {
+  --font-scale: 1;
+}
+body {
+  font-size: calc(16px * var(--font-scale));
+}
+
+
+@media(max-width:900px){
+  
+
+}
+
+
+/* Sidebar polish */
+.sidebar {
+    background: #fafafa;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+    font-family: system-ui, sans-serif;
+}
+
+#toc a {
+    padding: 6px 4px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+#toc a:hover {
+    background: #e9e9ff;
+}
+
+#toc a.active {
+    background: #d8d8ff;
+    font-weight: bold;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+</style>
+<style>
+body { margin: 0; display: flex; }
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 16px;
+    position: fixed;
+    top: 0; left: 0;
+}
+#site-search {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+#toc a {
+    display: block;
+    padding: 4px 0;
+    text-decoration: none;
+    color: #333;
+}
+#toc a.sub { padding-left: 12px; }
+#toc a.subsub { padding-left: 24px; }
+main.content { margin-left: 260px; padding: 20px; }
 </style>
 </head>
-<body>
-<div aria-label="Table of contents" class="sidebar card">
-<h2>Contents</h2>
-<div id="toc"></div>
-</div>
+<body><div class="sidebar"><h2>Contents</h2><input aria-label="Search" id="site-search" placeholder="Search..."/><div id="toc"><a href="#entity-models-of-the-application">Entity Models of the
+Application</a><a class="subsub" href="#mastersother">Masters/Other</a><a class="subsub" href="#families">Families</a><a class="subsub" href="#legal-entities">Legal entities</a><a class="subsub" href="#internal-entities-which-support-various-functionalities-into-legal-entities">Internal
+entities Which Support Various Functionalities into legal entities</a><a class="sub" href="#entity-documentation">Entity Documentation</a><a class="sub" href="#user">User</a><a class="sub" href="#company">Company</a><a class="sub" href="#contact">Contact</a><a class="sub" href="#family">Family</a><a class="sub" href="#address">Address</a><a class="sub" href="#investmentfund">InvestmentFund</a><a class="sub" href="#familyservicescope">FamilyServiceScope</a><a class="sub" href="#familyreferral">FamilyReferral</a><a class="sub" href="#legalentity">LegalEntity</a><a class="sub" href="#serviceoption">ServiceOption</a><a class="sub" href="#householdteam">HouseholdTeam</a><a class="sub" href="#userlegalentitydata">UserLegalEntityData</a><a class="sub" href="#individual">Individual</a><a class="sub" href="#individualparent">IndividualParent</a><a class="sub" href="#individualassociatecontact">IndividualAssociateContact</a><a class="sub" href="#individualdivorce">IndividualDivorce</a><a class="sub" href="#joint">Joint</a><a class="sub" href="#foundation">Foundation</a><a class="sub" href="#estate">Estate</a><a class="sub" href="#partnership">Partnership</a><a class="sub" href="#partnershipowner">PartnershipOwner</a><a class="sub" href="#partnershipowneritem">PartnershipOwnerItem</a><a class="sub" href="#trust">Trust</a><a class="sub" href="#trustamendment">TrustAmendment</a><a class="sub" href="#trustee">Trustee</a><a class="sub" href="#amendmentkey">AmendmentKey</a><a class="sub" href="#task">Task</a><a class="sub" href="#enum">Enum</a><a class="subsub" href="#sectionname">SectionName</a><a class="sub" href="#enum-1">Enum</a><a class="subsub" href="#tag">Tag</a><a class="sub" href="#subtask">SubTask</a><a class="sub" href="#recurringtasktrigger">RecurringTaskTrigger</a><a class="sub" href="#notification">Notification</a><a class="sub" href="#tasknotification-extends-notification">TaskNotification extends
+Notification</a><a class="sub" href="#chatnotification-extends-notification">ChatNotification extends
+Notification</a><a class="sub" href="#communicationmeeting">CommunicationMeeting</a><a class="sub" href="#meetingagenda">MeetingAgenda</a><a class="sub" href="#communicationnote">CommunicationNote</a><a class="sub" href="#researchcommunication">ResearchCommunication</a><a class="sub" href="#communicationproject">CommunicationProject</a><a class="sub" href="#notes-33">Notes</a><a class="sub" href="#financialmatterdirective">FinancialMatterDirective</a><a class="sub" href="#healthdecisiondirective">HealthDecisionDirective</a><a class="sub" href="#healthsupplementdirective">HealthSupplementDirective</a><a class="sub" href="#protectedhealthdirective">ProtectedHealthDirective</a><a class="sub" href="#annualdistribution">AnnualDistribution</a><a class="sub" href="#annualpayment">AnnualPayment</a><a class="sub" href="#articlepolicylimit">ArticlePolicyLimit</a><a class="sub" href="#assetvaluation">AssetValuation</a><a class="sub" href="#asset">Asset</a><a class="sub" href="#bankaccount">BankAccount</a><a class="sub" href="#sloadetail">SloaDetail</a><a class="sub" href="#beneficiary">Beneficiary</a><a class="sub" href="#governance">Governance</a><a class="sub" href="#grant">Grant</a><a class="sub" href="#grantpayment">GrantPayment</a><a class="sub" href="#project">Project</a><a class="sub" href="#recurringpayment">RecurringPayment</a><a class="sub" href="#paymentlot">PaymentLot</a><a class="sub" href="#simplegrant">SimpleGrant</a><a class="sub" href="#taxreturn">TaxReturn</a><a class="sub" href="#taxreturndetail">TaxReturnDetail</a><a class="sub" href="#taxreturndependency">TaxReturnDependency</a><a class="sub" href="#taxreturnpayment">TaxReturnPayment</a><a class="sub" href="#taxcomponent">TaxComponent</a><a class="sub" href="#taxdistributionpartner">TaxDistributionPartner</a><a class="sub" href="#taxform">TaxForm</a><a class="sub" href="#taxformsection">TaxFormSection</a><a class="sub" href="#taxfilling">TaxFilling</a><a class="sub" href="#gift">Gift</a><a class="sub" href="#giftallocation">GiftAllocation</a><a class="sub" href="#giftdistribution">GiftDistribution</a><a class="sub" href="#giftallocationdetail">GiftAllocationDetail</a><a class="sub" href="#insurance">Insurance</a><a class="sub" href="#insurancerenewal">InsuranceRenewal</a><a class="sub" href="#homeowner">Homeowner</a><a class="sub" href="#vehicle">Vehicle</a><a class="sub" href="#watercraft">Watercraft</a><a class="sub" href="#valuablearticle">ValuableArticle</a><a class="sub" href="#excessliability">ExcessLiability</a><a class="sub" href="#catastrophicevent">CatastrophicEvent</a><a class="sub" href="#workercompensation">WorkerCompensation</a><a class="sub" href="#smallbusiness">SmallBusiness</a><a class="sub" href="#aircraft">Aircraft</a><a class="sub" href="#aircraftcoverage">AircraftCoverage</a><a class="sub" href="#otherinsurance">OtherInsurance</a><a class="sub" href="#termlife">TermLife</a><a class="sub" href="#wholelife">WholeLife</a><a class="sub" href="#longtermcare">LongTermCare</a><a class="sub" href="#medicare">Medicare</a><a class="sub" href="#medicaresupplement">MedicareSupplement</a><a href="#medicaresupplement-1">MedicareSupplement</a><a class="sub" href="#recreationalvehicle">RecreationalVehicle</a><a class="sub" href="#motorcycle">Motorcycle</a><a class="sub" href="#investment">Investment</a><a class="sub" href="#investmentworkspace">InvestmentWorkspace</a><a class="sub" href="#workspacepreference">WorkspacePreference</a><a class="sub" href="#workspacesuitability">WorkspaceSuitability</a><a class="sub" href="#workspacetaxdetail">WorkspaceTaxDetail</a><a class="sub" href="#workspacediscretion">WorkspaceDiscretion</a><a class="sub" href="#workspacetaxdetail-1">WorkspaceTaxDetail</a><a class="sub" href="#workspaceportfolioconstruction">WorkspacePortfolioConstruction</a><a class="sub" href="#incentivestock">IncentiveStock</a><a class="sub" href="#incentivegrant">IncentiveGrant</a><a class="sub" href="#vestingschedule">VestingSchedule</a><a class="sub" href="#vesteddetail">VestedDetail</a><a class="sub" href="#exercise">Exercise</a><a class="sub" href="#ips">Ips</a><a class="sub" href="#ipsaccountentity">IpsAccountEntity</a><a class="sub" href="#ipsaccount">IpsAccount</a><a class="sub" href="#ipsassetallocation">IpsAssetAllocation</a><a class="sub" href="#ipsgroupsummary">IpsGroupSummary</a><a class="sub" href="#estatewill">EstateWill</a><a class="sub" href="#estatetrust">EstateTrust</a><a class="sub" href="#report">Report</a><a class="sub" href="#reportdetail">ReportDetail</a><a class="sub" href="#mailinglist">MailingList</a><a class="sub" href="#view">View</a><a class="sub" href="#fincenreportings">FincenReportings</a><a class="sub" href="#asadetail">AsaDetail</a><a class="sub" href="#feedetail">FeeDetail</a><a class="sub" href="#feeactual">FeeActual</a><a class="sub" href="#feebudget">FeeBudget</a><a class="sub" href="#feehistory">FeeHistory</a></div></div>
 <div class="toggle-container">
-<button class="toggle-btn" id="theme-toggle">Toggle Dark</button>
+<label style="font-size:14px;">Theme: <select id="theme-select"><option value="light">Light</option><option value="dark">Dark</option><option value="sepia">Sepia</option><option value="solarized">Solarized</option></select></label>
+<button class="toggle-btn small-btn" id="print-btn" title="Print / Save as PDF">Print PDF</button>
+<button class="back-to-top" id="top-btn" title="Back to top">↑</button>
 </div>
 <main class="content">
 <div class="card" id="content-card">
@@ -358,7 +478,7 @@ entities Which Support Various Functionalities into legal entities</h3>
 <li>Table: <em>user</em></li>
 <li>Class: <em>com.dw.athena.model.User</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -462,7 +582,7 @@ false.</td>
 <td>Notes of the user</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -479,7 +599,7 @@ false.</td>
 <li>Table: <em>Company</em></li>
 <li>Class: <em>com.dw.athena.model.Company</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -773,7 +893,7 @@ field will be updated.</td>
 <td></td>
 <td></td>
 <td>companyBoards</td>
-<td>Set&lt;<a href="#companyboards">CompanyBoards</a>&gt;</td>
+<td>Set&lt;<a href="#companyboard">CompanyBoards</a>&gt;</td>
 <td>CompanyBoards <br/> It is bi-directional relationship.</td>
 </tr>
 <tr class="odd">
@@ -960,12 +1080,12 @@ field</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
 <h4 id="enums">Enums</h4>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 38%"/>
 <col style="width: 61%"/>
@@ -998,7 +1118,7 @@ field</td>
 <code>LIMITED_PARTNERSHIP</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-1">Description</h4>
 <h6 id="when-created">When created</h6>
 <ul>
@@ -1024,7 +1144,7 @@ be set , when company is <code>archived</code>.</li>
 <li>Table: <em>Contact</em></li>
 <li>Class: <em>com.dw.athena.model.Contact</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -1684,12 +1804,12 @@ field</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
 <h4 id="enums-1">Enums</h4>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 38%"/>
 <col style="width: 61%"/>
@@ -1722,7 +1842,7 @@ field</td>
 <code>LIMITED_PARTNERSHIP</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-2">Description</h4>
 <h6 id="when-created-1">When created</h6>
 <ul>
@@ -1748,7 +1868,7 @@ be set , when company is <code>archived</code>.</li>
 <li>Table: <em>family</em></li>
 <li>Class: <em>com.dw.athena.model.Family</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -1903,7 +2023,7 @@ be set , when company is <code>archived</code>.</li>
 <td></td>
 <td></td>
 <td>templates</td>
-<td>Set&lt;<a href="#entity-multisteptemplate">MultiStepTemplate</a>&gt;</td>
+<td>Set&lt;<a href="#multisteptemplate">MultiStepTemplate</a>&gt;</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 <tr class="odd">
@@ -1964,7 +2084,7 @@ be set , when company is <code>archived</code>.</li>
 class.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -1987,7 +2107,7 @@ when the family is updated.</li>
 <li>Table: <em>address</em></li>
 <li>Class: <em>com.dw.athena.model.Address</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -2069,7 +2189,7 @@ when the family is updated.</li>
 <td>Linked address.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -2097,21 +2217,21 @@ is updated.</li>
 <li>Table: <em>investment_fund</em></li>
 <li>Class: <em>com.dw.athena.model.InvestmentFund</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table>
 <colgroup>
-<col style="width: 22%"/>
-<col style="width: 19%"/>
-<col style="width: 22%"/>
-<col style="width: 20%"/>
-<col style="width: 16%"/>
+<col style="width: 15%"/>
+<col style="width: 13%"/>
+<col style="width: 15%"/>
+<col style="width: 14%"/>
+<col style="width: 41%"/>
 </colgroup>
 <thead>
 <tr class="header">
+<th></th>
 <th>SQL Column Name</th>
 <th>SQL Data Type</th>
 <th>Java Field Name</th>
 <th>Java Data Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -2120,20 +2240,191 @@ is updated.</li>
 <td>VARCHAR(50)</td>
 <td>id</td>
 <td>String</td>
-<td>Primary key, unique identity</td>
+<td>Primary key, an unique identity of the instance.</td>
 </tr>
 <tr class="even">
 <td><strong>version</strong></td>
 <td>BIGINT</td>
 <td>version</td>
 <td>Integer</td>
-<td>Current version of the entity</td>
+<td>Current version of the entity.</td>
+</tr>
+<tr class="odd">
+<td>archived</td>
+<td>TINYINT(1)</td>
+<td>archived</td>
+<td>Boolean</td>
+<td>Represents whether fund is archived or active.</td>
+</tr>
+<tr class="even">
+<td><strong>name</strong></td>
+<td>MEDIUMTEXT</td>
+<td>name</td>
+<td>String</td>
+<td>Name of the fund</td>
+</tr>
+<tr class="odd">
+<td>goal</td>
+<td>ENUM</td>
+<td>goal</td>
+<td><a href="#enums">InvestmentFund.Goal</a></td>
+<td>Goal of the InvestmentFund</td>
+</tr>
+<tr class="even">
+<td>purpose</td>
+<td>ENUM</td>
+<td>purpose</td>
+<td><a href="#enums">InvestmentFund.Purpose</a></td>
+<td>Purpose of the InvestmentFund</td>
+</tr>
+<tr class="odd">
+<td>asset_class</td>
+<td>ENUM</td>
+<td>assetClass</td>
+<td><a href="#enums">InvestmentFund.AssetClass</a></td>
+<td>Asset class of the InvestmentFund</td>
+</tr>
+<tr class="even">
+<td>asset_manager_id</td>
+<td>VARHCAR(50)</td>
+<td>assetManager</td>
+<td><a href="#company">Company</a></td>
+<td>Asset manager of fund.</td>
+</tr>
+<tr class="odd">
+<td>fund_type</td>
+<td>ENUM</td>
+<td>FundType</td>
+<td><a href="#enums">InvestmentFund.FundType</a></td>
+<td>Fund type of the InvestmentFund</td>
+</tr>
+<tr class="even">
+<td>draw_down</td>
+<td>TINYINT(1)</td>
+<td>drawDown</td>
+<td>Boolean</td>
+<td>Applicable only for Limited Partnership type fund.</td>
+</tr>
+<tr class="odd">
+<td>latest_lp_wire_instruction_id</td>
+<td>VARHCAR(50)</td>
+<td>wireInstruction</td>
+<td><a href="#lpwireinstruction">LpWireInstruction</a></td>
+<td>Applicable only for Limited Partnership type fund.</td>
+</tr>
+<tr class="even">
+<td>stock_symbol</td>
+<td>varchar(100)</td>
+<td>stockSymbol</td>
+<td>String</td>
+<td>Text field selection.</td>
+</tr>
+<tr class="odd">
+<td>stock_exchange_id</td>
+<td>VARHCAR(50)</td>
+<td>stockExchange</td>
+<td><a href="#company">Company</a></td>
+<td>Stock exchange of fund.</td>
+</tr>
+<tr class="even">
+<td>short_name</td>
+<td>varchar(100)</td>
+<td>shortName</td>
+<td>String</td>
+<td>Fund’s short name</td>
+</tr>
+<tr class="odd">
+<td>formation_date</td>
+<td>VARCHAR(50)</td>
+<td>formationDate</td>
+<td>String</td>
+<td>Date of formation of the investment fund.</td>
+</tr>
+<tr class="even">
+<td>own_service_team</td>
+<td>TINYINT(1)</td>
+<td>ownServiceTeam</td>
+<td>Boolean</td>
+<td>check for service team</td>
+</tr>
+<tr class="odd">
+<td><strong>created</strong></td>
+<td>DATETIME</td>
+<td>created</td>
+<td>Date</td>
+<td>Date and Time when this entity is created</td>
+</tr>
+<tr class="even">
+<td><strong>created_by</strong></td>
+<td>VARCHAR(50)</td>
+<td>createdBy</td>
+<td><a href="#user">User</a></td>
+<td><a href="#user">User</a>, who created this entity</td>
+</tr>
+<tr class="odd">
+<td><strong>updated</strong></td>
+<td>DATETIME</td>
+<td>updated</td>
+<td>Date</td>
+<td>When this entity is lastly updated</td>
+</tr>
+<tr class="even">
+<td><strong>updated_by</strong></td>
+<td>VARCHAR(50)</td>
+<td>updatedBy</td>
+<td><a href="#user">User</a></td>
+<td><a href="#user">User</a>, who updated this entity</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>researchCommunications</td>
+<td>Set&lt;<a href="#researchcommunication">ResearchCommunication</a>&gt;</td>
+<td>set up meetings/Notes at fund level.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>researchManagers</td>
+<td>List&lt;<a href="#serviceteamresearchmanager">ServiceTeamResearchManager</a>&gt;</td>
+<td>set up service team at assetmanager level.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
+<h4 id="enums-2">Enums</h4>
+<div class="table-wrap"><table>
+<colgroup>
+<col style="width: 38%"/>
+<col style="width: 61%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Goal</td>
+<td><code>APPRECIATION</code>, <code>PRESERVATION</code></td>
+</tr>
+<tr class="even">
+<td>Purpose</td>
+<td><code>GROWTH_ILLIQUID</code>,<code>GROWTH</code>,<code>DIVERSIFICATION</code>,<code>STABILITY</code>,<code>LIQUIDITY</code></td>
+</tr>
+<tr class="odd">
+<td>AssetClass</td>
+<td><code>PRIVATE_EQUITY</code>,<code>CORE_EQUITIES</code>,<code>SATELLITE_GROWTH</code>,<code>ABSOLUTE_RETURN</code>,<code>CORE_BONDS</code>,<code>FOCUSED_STRATEGIES</code>,<code>HYBRID_STRATEGIES</code>,<code>PRIVATE_DEBT</code>,<code>SHORT_TERM_BONDS</code>,<code>CASH_EQUIVALENTS</code>,<code>ENHANCED_CASH</code></td>
+</tr>
+<tr class="even">
+<td>FundType</td>
+<td><code>ETF</code>,<code>MUTUAL_FUND</code>,<code>LIMITED_PARTNERSHIP</code></td>
+</tr>
+</tbody>
+</table></div>
 <h4 id="description-5">Description</h4>
 <ul>
 <li>Placeholder for investment fund entity description.</li>
@@ -2147,7 +2438,7 @@ is updated.</li>
 <li>Table: <em>family_service_scope</em></li>
 <li>Class: <em>com.dw.athena.model.FamilyServiceScope</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -2244,7 +2535,7 @@ false.</td>
 <td><a href="#user">User</a>, who archived current service scope.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -2262,7 +2553,7 @@ update.</li>
 <li>Table: <em>family_referral</em></li>
 <li>Class: <em>com.dw.athena.model.FamilyReferral</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -2316,7 +2607,7 @@ update.</li>
 <td>family of the family referral</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -2333,7 +2624,7 @@ update.</li>
 <li>Table: <em>legal_entity</em></li>
 <li>Class: <em>com.dw.athena.model.LegalEntity</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -3402,12 +3693,12 @@ relation.</td>
 <td>fincen reporting of entity.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-2">Enums</h4>
-<table>
+<h4 id="enums-3">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -3432,9 +3723,9 @@ relation.</td>
 <td>OWN, ASA_ENTITY, OTHER_ENTITY</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="serviceoption">ServiceOption</h2>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -3447,9 +3738,9 @@ relation.</td>
 <td>NO , LIGHT, CORE, CUSTOM</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="householdteam">HouseholdTeam</h2>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -3503,7 +3794,7 @@ relation.</td>
 <td>Involved Entity.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-8">Description</h4>
 <ul>
 <li>Placeholder for legal entity description.</li>
@@ -3517,7 +3808,7 @@ relation.</td>
 <li>Table: <em>user_legal_entity_data</em></li>
 <li>Class: <em>com.dw.athena.model.UserLegalEntityData</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -3573,7 +3864,7 @@ field will be updated.</td>
 <td>User related to userLegalEntityData</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -3590,7 +3881,7 @@ field will be updated.</td>
 <li>Table: <em>individual</em></li>
 <li>Class: <em>com.dw.athena.model.Individual</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -3771,7 +4062,7 @@ relation.</td>
 <td></td>
 <td></td>
 <td>autoMobiles</td>
-<td>Set&lt;<a href="entity-automobile.md">AutoMobile</a>&gt;</td>
+<td>Set&lt;<a href="#automobile">AutoMobile</a>&gt;</td>
 <td>AutoMobile related to individual.<br/> It is bi-directional
 relation.</td>
 </tr>
@@ -3803,7 +4094,7 @@ relation.</td>
 <td></td>
 <td></td>
 <td>companyBoards</td>
-<td>Set&lt;<a href="entity-companyboard.md">CompanyBoard</a>&gt;</td>
+<td>Set&lt;<a href="#companyboard">CompanyBoard</a>&gt;</td>
 <td>CompanyBoard associated to individual.<br/> It is bi-directional
 relation.</td>
 </tr>
@@ -3811,7 +4102,7 @@ relation.</td>
 <td></td>
 <td></td>
 <td>wills</td>
-<td>Set&lt;<a href="entity-estatewill.md">EstateWill</a>&gt;</td>
+<td>Set&lt;<a href="#estatewill">EstateWill</a>&gt;</td>
 <td>EstateWill associated to individual.<br/> It is bi-directional
 relation.</td>
 </tr>
@@ -3819,7 +4110,7 @@ relation.</td>
 <td></td>
 <td></td>
 <td>financialMatterDirectives</td>
-<td>Set&lt;<a href="entity-financialmatterdirective.md">FinancialMatterDirective</a>&gt;</td>
+<td>Set&lt;<a href="#financialmatterdirective">FinancialMatterDirective</a>&gt;</td>
 <td>FinancialMatterDirective associated to individual.<br/> It is
 bi-directional relation.</td>
 </tr>
@@ -3827,7 +4118,7 @@ bi-directional relation.</td>
 <td></td>
 <td></td>
 <td>healthDecisionDirectives</td>
-<td>Set&lt;<a href="entity-healthdecisiondirective.md">HealthDecisionDirective</a>&gt;</td>
+<td>Set&lt;<a href="#healthdecisiondirective">HealthDecisionDirective</a>&gt;</td>
 <td>HealthDecisionDirective associated to individual.<br/> It is
 bi-directional relation.</td>
 </tr>
@@ -3835,7 +4126,7 @@ bi-directional relation.</td>
 <td></td>
 <td></td>
 <td>healthSupplementDirectives</td>
-<td>Set&lt;<a href="entity-healthsupplementdirective.md">HealthSupplementDirective</a>&gt;</td>
+<td>Set&lt;<a href="#healthsupplementdirective">HealthSupplementDirective</a>&gt;</td>
 <td>HealthSupplementDirective associated to individual.<br/> It is
 bi-directional relation.</td>
 </tr>
@@ -3843,7 +4134,7 @@ bi-directional relation.</td>
 <td></td>
 <td></td>
 <td>protectedHealthDirectives</td>
-<td>Set&lt;<a href="entity-protectedhealthdirective.md">ProtectedHealthDirective</a>&gt;</td>
+<td>Set&lt;<a href="#protectedhealthdirective">ProtectedHealthDirective</a>&gt;</td>
 <td>ProtectedHealthDirective associated to individual.<br/> It is
 bi-directional relation.</td>
 </tr>
@@ -3851,7 +4142,7 @@ bi-directional relation.</td>
 <td></td>
 <td></td>
 <td>giftExemptions</td>
-<td>Set&lt;<a href="entity-giftexemption.md">GiftExemption</a>&gt;</td>
+<td>Set&lt;<a href="#giftexemption">GiftExemption</a>&gt;</td>
 <td>GiftExemption associated to individual.<br/> It is bi-directional
 relation.</td>
 </tr>
@@ -3859,7 +4150,7 @@ relation.</td>
 <td></td>
 <td></td>
 <td>associatedJoints</td>
-<td>Set&lt;<a href="entity-joint.md">Joint</a>&gt;</td>
+<td>Set&lt;<a href="#joint">Joint</a>&gt;</td>
 <td>It is a transient field</td>
 </tr>
 <tr class="odd">
@@ -3880,13 +4171,13 @@ relation.</td>
 <td></td>
 <td></td>
 <td>companyBoards</td>
-<td>Set&lt;<a href="entity-companyboards.md">CompanyBoards</a>&gt;</td>
+<td>Set&lt;<a href="#companyboard">CompanyBoards</a>&gt;</td>
 <td>CompanyBoards <br/> It is bi-directional relationship.</td>
 </tr>
 </tbody>
-</table>
-<h4 id="enums-3">Enums</h4>
-<table>
+</table></div>
+<h4 id="enums-4">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -3899,7 +4190,7 @@ relation.</td>
 <td>SINGLE, MARRIED, COHABITATING, SEPARATED</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-10">Description</h4>
 <ul>
 <li>Placeholder for individual entity description.</li>
@@ -3913,7 +4204,7 @@ relation.</td>
 <li>Table: <em>individual_parent</em></li>
 <li>Class: <em>com.dw.athena.model.IndividualParent</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -3967,12 +4258,12 @@ relation.</td>
 <td>contact related to individualParent</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-4">Enums</h4>
-<table>
+<h4 id="enums-5">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -3985,7 +4276,7 @@ relation.</td>
 <td>FATHER, MOTHER, GUARDIAN, OTHER</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-11">Description</h4>
 <ul>
 <li>Placeholder for individual parent entity description.</li>
@@ -3999,7 +4290,7 @@ relation.</td>
 <li>Table: <em>individual_associate_contact</em></li>
 <li>Class: <em>com.dw.athena.model.IndividualAssociateContact</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4067,7 +4358,7 @@ relation.</td>
 <td>contact related to individual associate contact</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4085,7 +4376,7 @@ description.</li>
 <li>Table: <em>individual_divorce</em></li>
 <li>Class: <em>com.dw.athena.model.IndividualDivorce</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4139,7 +4430,7 @@ description.</li>
 <td>individual related to divorce</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4156,7 +4447,7 @@ description.</li>
 <li>Table: <em>joint</em></li>
 <li>Class: <em>com.dw.athena.model.Joint</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4210,7 +4501,7 @@ description.</li>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4227,7 +4518,7 @@ description.</li>
 <li>Table: <em>foundation</em></li>
 <li>Class: <em>com.dw.athena.model.Foundation</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4313,12 +4604,12 @@ will be set for the foundation whose type is <code>DAF.</code></td>
 is endDate. It is transiant field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-5">Enums</h4>
-<table>
+<h4 id="enums-6">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -4331,7 +4622,7 @@ is endDate. It is transiant field.</td>
 <td>TRUST, C_CORPORATION, DAF, NON_PROFIT_CORPORATION</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-15">Description</h4>
 <ul>
 <li>Placeholder for foundation entity description.</li>
@@ -4345,7 +4636,7 @@ is endDate. It is transiant field.</td>
 <li>Table: <em>estate</em></li>
 <li>Class: <em>com.dw.athena.model.Estate</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4386,7 +4677,7 @@ is endDate. It is transiant field.</td>
 relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4403,7 +4694,7 @@ relationship.</td>
 <li>Table: <em>partnership</em></li>
 <li>Class: <em>com.dw.athena.model.Partnership</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4520,7 +4811,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>fincenReportings</td>
-<td>Set&lt;<a href="entity-fincenreporting.md">FincenReporting</a>&gt;</td>
+<td>Set&lt;<a href="#fincenreporting">FincenReporting</a>&gt;</td>
 <td>FincenReporting related to partnership. <br/> It is bi-directional
 relationship.</td>
 </tr>
@@ -4528,7 +4819,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>boiFilings</td>
-<td>Set&lt;<a href="entity-boifilings.md">BoiFilings</a>&gt;</td>
+<td>Set&lt;<a href="#boifilings">BoiFilings</a>&gt;</td>
 <td>BoiFilings related to partnership. <br/> It is bi-directional
 relationship.</td>
 </tr>
@@ -4571,12 +4862,12 @@ individual. It is transiant field.</td>
 a group entities in other entities portfolio.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-6">Enums</h4>
-<table>
+<h4 id="enums-7">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -4593,7 +4884,7 @@ a group entities in other entities portfolio.</td>
 <td><code>EIN</code>, <code>SSN</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-17">Description</h4>
 <ul>
 <li>Placeholder for partnership entity description.</li>
@@ -4607,7 +4898,7 @@ a group entities in other entities portfolio.</td>
 <li>Table: <em>partnership_owner</em></li>
 <li>Class: <em>com.dw.athena.model.PartnershipOwner</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4668,7 +4959,7 @@ a group entities in other entities portfolio.</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4685,7 +4976,7 @@ a group entities in other entities portfolio.</td>
 <li>Table: <em>partnership_owner_item</em></li>
 <li>Class: <em>com.dw.athena.model.PartnershipOwnerItem</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4746,7 +5037,7 @@ a group entities in other entities portfolio.</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -4763,7 +5054,7 @@ a group entities in other entities portfolio.</td>
 <li>Table: <em>trust</em></li>
 <li>Class: <em>com.dw.athena.model.Trust</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -4956,12 +5247,12 @@ amendment.</td>
 a group entities in other entities portfolio.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-7">Enums</h4>
-<table>
+<h4 id="enums-8">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 42%"/>
 <col style="width: 57%"/>
@@ -4986,7 +5277,7 @@ a group entities in other entities portfolio.</td>
 <td><code>GIFT_TRUST</code>,<code>REVOCABLE_TRUST</code>,<code>QUALIFIED_PERSONAL_RESIDENCE_TRUST</code>,<code>QUALIFIED_TERMINABLE_TRUST</code>,<code>GRANTOR_RETAINED_ANNUITY_TRUST</code>,<code>GRANTOR_RETAINED_UNITRUST</code>,<code>CHARITABLE_LEAD_ANNUITY_TRUST</code>,<code>CHARITABLE_LEAD_UNITRUST</code>,<code>CHARITABLE_REMAINDER_TRUST</code>,<code>CHARITABLE_REMAINDER_UNITRUST</code>,<code>CREDIT_SHELTER_TRUST</code>,<code>EDUCATION_TRUST</code>,<code>DISCRETIONARY_TRUST</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-20">Description</h4>
 <ul>
 <li>Placeholder for trust entity description.</li>
@@ -5000,7 +5291,7 @@ a group entities in other entities portfolio.</td>
 <li>Table: <em>trust_amendment</em></li>
 <li>Class: <em>com.dw.athena.model.TrustAmendment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -5287,12 +5578,12 @@ Dates</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-8">Enums</h4>
-<table>
+<h4 id="enums-9">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -5306,7 +5597,7 @@ Dates</td>
 <code>YEARLY</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-21">Description</h4>
 <ul>
 <li>Placeholder for trust amendment entity description.</li>
@@ -5320,7 +5611,7 @@ Dates</td>
 <li>Table: <em>trustee</em></li>
 <li>Class: <em>com.dw.athena.model.Trustee</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -5374,7 +5665,7 @@ Dates</td>
 <td>Trust related to trustee</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -5391,7 +5682,7 @@ Dates</td>
 <li>Table: <em>amendment_key</em></li>
 <li>Class: <em>com.dw.athena.model.AmendmentKey</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -5445,7 +5736,7 @@ Dates</td>
 <td>TrustAmendment related to amendment key.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -5462,7 +5753,7 @@ Dates</td>
 <li>Table: <em>task</em></li>
 <li>Class: <em>com.dw.athena.model.Task</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -5604,7 +5895,7 @@ TRADING</td>
 <td>portfolio_reporting</td>
 <td>JSON</td>
 <td>portfolioReporting</td>
-<td><a href="entity-portfolio-reporting.md">PortfolioReporting</a></td>
+<td><a href="#portfolioreporting">PortfolioReporting</a></td>
 <td>portfolio latest reporting when task created with the Operation
 Reporting tag.</td>
 </tr>
@@ -5612,7 +5903,7 @@ Reporting tag.</td>
 <td>communication_meeting_id</td>
 <td>VARCHAR(50)</td>
 <td>communicationMeeting</td>
-<td><a href="entity-communicationmeeting.md">CommunicationMeeting</a></td>
+<td><a href="#communicationmeeting">CommunicationMeeting</a></td>
 <td>CommunicationMeeting entity related to task. Mandatory when
 type=MEETING</td>
 </tr>
@@ -5620,7 +5911,7 @@ type=MEETING</td>
 <td>communication_note_id</td>
 <td>VARCHAR(50)</td>
 <td>communicationNote</td>
-<td><a href="entity-communicationNote.md">CommunicationNote</a></td>
+<td><a href="#communicationnote">CommunicationNote</a></td>
 <td>CommunicationNote entity related to task. Mandatory when
 type=NOTE</td>
 </tr>
@@ -5628,7 +5919,7 @@ type=NOTE</td>
 <td>trade_log_id</td>
 <td>VARCHAR(50)</td>
 <td>tradelog</td>
-<td><a href="entity-investment.md">Investment</a></td>
+<td><a href="#investment">Investment</a></td>
 <td>Investment entity related to task. Mandatory when
 type=TRADE_LOG</td>
 </tr>
@@ -5636,7 +5927,7 @@ type=TRADE_LOG</td>
 <td>recurring_task_trigger_id</td>
 <td>VARCHAR(50)</td>
 <td>recurringTaskTrigger</td>
-<td><a href="entity-task-scheduler.md">RecurringTaskTrigger</a></td>
+<td><a href="#recurringtasktrigger">RecurringTaskTrigger</a></td>
 <td>RecurringTaskTrigger entity related to task</td>
 </tr>
 <tr class="odd">
@@ -5664,14 +5955,14 @@ type=TRADE_LOG</td>
 <td></td>
 <td></td>
 <td>subTasks</td>
-<td>List&lt;<a href="entity-sub-task.md">SubTask</a>&gt;</td>
+<td>List&lt;<a href="#subtask">SubTask</a>&gt;</td>
 <td>sub tasks when type=MULTI_STEP</td>
 </tr>
 <tr class="odd">
 <td>template</td>
 <td>VARCHAR(50)</td>
 <td>template</td>
-<td><a href="entity-multisteptemplate.md">MultiStepTemplate</a></td>
+<td><a href="#multisteptemplate">MultiStepTemplate</a></td>
 <td>Optional. Multistep Template reference when type=MULTI_STEP</td>
 </tr>
 <tr class="even">
@@ -5692,14 +5983,14 @@ type=TRADE_LOG</td>
 <td>fund_id</td>
 <td>VARCHAR(50)</td>
 <td>fund</td>
-<td><a href="entity-investment-fund.md">InvestmentFund</a></td>
+<td><a href="#investmentfund">InvestmentFund</a></td>
 <td>fund related to asset manager company.</td>
 </tr>
 <tr class="odd">
 <td>research_communication_id</td>
 <td>VARCHAR(50)</td>
 <td>researchCommunication</td>
-<td><a href="entity-researchCommunication.md">ResearchCommunication</a></td>
+<td><a href="#researchCommunication">ResearchCommunication</a></td>
 <td>researchCommunication related to this task.</td>
 </tr>
 <tr class="even">
@@ -5731,13 +6022,13 @@ type=TRADE_LOG</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
 <h2 id="enum">Enum</h2>
 <h3 id="sectionname">SectionName</h3>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -5761,10 +6052,10 @@ type=TRADE_LOG</td>
 ‘MANAGER_RESEARCH’</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="enum-1">Enum</h2>
 <h3 id="tag">Tag</h3>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -5786,7 +6077,7 @@ type=TRADE_LOG</td>
 ‘OPERATIONAL_DILIGENCE’, ‘INVESTMENT_DILIGENCE’</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-24">Description</h4>
 <ul>
 <li>Placeholder for task entity description.</li>
@@ -5800,7 +6091,7 @@ type=TRADE_LOG</td>
 <li>Table: <em>sub_task</em></li>
 <li>Class: <em>com.dw.athena.model.SubTask</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -5890,7 +6181,7 @@ OPERATIONAL_DILIGENCE, INVESTMENT_DILIGENCE</td>
 <td><strong>task_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>task</td>
-<td><a href="entity-task.md">Task</a></td>
+<td><a href="#task">Task</a></td>
 <td>Parent task.</td>
 </tr>
 <tr class="odd">
@@ -5968,7 +6259,7 @@ responsible.</td>
 <td>to_account_id</td>
 <td>VARCHAR(50)</td>
 <td>toAccount</td>
-<td>SloaDetail(entity-sloa-detail.md)</td>
+<td>SloaDetail(#sloadetail)</td>
 <td>Id of Sloa detail</td>
 </tr>
 <tr class="even">
@@ -6028,7 +6319,7 @@ responsible.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -6045,7 +6336,7 @@ responsible.</td>
 <li>Table: <em>recurring_task_trigger</em></li>
 <li>Class: <em>com.dw.athena.model.RecurringTaskTrigger</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6176,7 +6467,7 @@ RECONCILIATION, PAYROLL, OTHER</td>
 <td></td>
 <td></td>
 <td>subTasks</td>
-<td>List&lt;<a href="entity-sub-task.md">SubTask</a>&gt;</td>
+<td>List&lt;<a href="#subtask">SubTask</a>&gt;</td>
 <td>sub tasks when multistepTask is true</td>
 </tr>
 <tr class="even">
@@ -6225,7 +6516,7 @@ RECONCILIATION, PAYROLL, OTHER</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -6242,7 +6533,7 @@ RECONCILIATION, PAYROLL, OTHER</td>
 <li>Table: <em>notification</em></li>
 <li>Class: <em>com.dw.athena.model.Notification</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6296,10 +6587,10 @@ RECONCILIATION, PAYROLL, OTHER</td>
 <td>Date and Time when notification is generated</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="tasknotification-extends-notification">TaskNotification extends
 Notification</h2>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6336,15 +6627,15 @@ DONE, CM_POOL_CLAIMED</td>
 <td><strong>task_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>task</td>
-<td><a href="entity-task.md">Task</a></td>
-<td><a href="entity-task.md">Task</a>, involved task.<br/> foreign key to
-the Task.id</td>
+<td><a href="#task">Task</a></td>
+<td><a href="#task">Task</a>, involved task.<br/> foreign key to the
+Task.id</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="chatnotification-extends-notification">ChatNotification extends
 Notification</h2>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6366,12 +6657,12 @@ Notification</h2>
 <td><strong>chat_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>chat</td>
-<td><a href="entity-chat.md">Chat</a></td>
-<td><a href="entity-chat.md">Chat</a>, involved chat.<br/> foreign key to
-the Chat.id</td>
+<td><a href="#chat">Chat</a></td>
+<td><a href="#chat">Chat</a>, involved chat.<br/> foreign key to the
+Chat.id</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -6391,7 +6682,7 @@ the Chat.id</td>
 <li>Table: <em>communication_meeting</em></li>
 <li>Class: <em>com.dw.athena.model.CommunicationMeeting</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6511,7 +6802,7 @@ the Chat.id</td>
 <td></td>
 <td></td>
 <td>agendas</td>
-<td>List&lt;<a href="entity-meetingagenda.md">MeetingAgenda</a>&gt;</td>
+<td>List&lt;<a href="#meetingagenda">MeetingAgenda</a>&gt;</td>
 <td>Agenda of the communication meeting</td>
 </tr>
 <tr class="even">
@@ -6536,12 +6827,12 @@ the Chat.id</td>
 <td>Transient field. Used to find related entity.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-9">Enums</h4>
-<table>
+<h4 id="enums-10">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -6554,7 +6845,7 @@ the Chat.id</td>
 <td>SCHEDULED, COMPLETED</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-28">Description</h4>
 <ul>
 <li>Placeholder for communication meeting entity description.</li>
@@ -6568,7 +6859,7 @@ the Chat.id</td>
 <li>Table: <em>meeting_agenda</em></li>
 <li>Class: <em>com.dw.athena.model.MeetingAgenda</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6654,18 +6945,18 @@ multi or may be null for related entity.</td>
 <td><strong>communication_meeting_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>communicationMeeting</td>
-<td><a href="entity-communicationmeeting.md">CommunicationMeeting</a></td>
+<td><a href="#communicationmeeting">CommunicationMeeting</a></td>
 <td>Communication meeting related to meeting agenda.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -6682,7 +6973,7 @@ multi or may be null for related entity.</td>
 <li>Table: <em>communication_note</em></li>
 <li>Class: <em>com.dw.athena.model.CommunicationNote</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6771,7 +7062,7 @@ multi or may be null for related entity.</td>
 <td>Communication project related to note.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -6788,7 +7079,7 @@ multi or may be null for related entity.</td>
 <li>Table: <em>research_communication</em></li>
 <li>Class: <em>com.dw.athena.model.ResearchCommunication</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -6933,13 +7224,13 @@ multi or may be null for related entity.</td>
 <td>Attendees of the research communication</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-10">Enums</h4>
+<h4 id="enums-11">Enums</h4>
 <h5 id="type">Type</h5>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -6952,9 +7243,9 @@ multi or may be null for related entity.</td>
 <td>SCHEDULED, ON HOLD, PENDING</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h5 id="status">Status</h5>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -6967,7 +7258,7 @@ multi or may be null for related entity.</td>
 <td>MEETING, NOTES</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-31">Description</h4>
 <ul>
 <li>Placeholder for research communication entity description.</li>
@@ -6981,7 +7272,7 @@ multi or may be null for related entity.</td>
 <li>Table: <em>communication_project</em></li>
 <li>Class: <em>com.dw.athena.model.CommunicationProject</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -7040,11 +7331,11 @@ of archived is <strong>false</strong>.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7061,7 +7352,7 @@ of archived is <strong>false</strong>.</td>
 <li>Table: <em>notes</em></li>
 <li>Class: <em>com.dw.athena.model.Notes</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 24%"/>
 <col style="width: 17%"/>
@@ -7178,7 +7469,7 @@ of archived is <strong>false</strong>.</td>
 <td>Transient field for request DTO</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7201,7 +7492,7 @@ of archived is <strong>false</strong>.</td>
 <li>Class: <em>com.dw.athena.model.FinancialMatterDirective extends
 AttorneyDirective</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 26%"/>
 <col style="width: 16%"/>
@@ -7318,7 +7609,7 @@ AttorneyDirective</em></li>
 <td>User who updated the entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7349,7 +7640,7 @@ automatically.</li>
 <li>Class: <em>com.dw.athena.model.HealthDecisionDirective extends
 AttorneyDirective</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 26%"/>
 <col style="width: 16%"/>
@@ -7466,7 +7757,7 @@ AttorneyDirective</em></li>
 <td>User who updated the entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7497,7 +7788,7 @@ automatically.</li>
 <li>Class: <em>com.dw.athena.model.HealthSupplementDirective extends
 AttorneyDirective</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 26%"/>
 <col style="width: 16%"/>
@@ -7614,7 +7905,7 @@ AttorneyDirective</em></li>
 <td>User who updated the entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7644,7 +7935,7 @@ automatically.</li>
 <li>Table: <em>protected_health_directive</em></li>
 <li>Class: <em>com.dw.athena.model.ProtectedHealthDirective</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 26%"/>
 <col style="width: 16%"/>
@@ -7740,7 +8031,7 @@ automatically.</li>
 <td>User who updated the entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7768,7 +8059,7 @@ automatically.</li>
 <li>Table: <em>trust_annual_distribution</em></li>
 <li>Class: <em>com.dw.aristata.model.AnnualDistribution</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 25%"/>
 <col style="width: 21%"/>
@@ -7836,7 +8127,7 @@ automatically.</li>
 <td>Related TrustAmendment</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7849,7 +8140,7 @@ automatically.</li>
 <li>Table: <em>trust_annual_payment</em></li>
 <li>Class: <em>com.dw.aristata.model.AnnualPayment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 25%"/>
 <col style="width: 21%"/>
@@ -7917,7 +8208,7 @@ automatically.</li>
 <td>Related TrustAmendment</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -7930,7 +8221,7 @@ automatically.</li>
 <li>Table: <em>article_policy_limit</em></li>
 <li>Class: <em>com.dw.athena.model.ArticlePolicyLimit</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -8012,7 +8303,7 @@ automatically.</li>
 <td>Used for update requests to skip validation of insured value</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>Enums:</strong> - CoverageType: NO, ITEMIZED, BLANKET</p>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
@@ -8026,7 +8317,7 @@ automatically.</li>
 <li>Table: <em>asset_valuation</em></li>
 <li>Class: <em>com.dw.athena.model.AssetValuation</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 25%"/>
 <col style="width: 21%"/>
@@ -8080,7 +8371,7 @@ automatically.</li>
 <td>Reference to the asset.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -8097,7 +8388,7 @@ automatically.</li>
 <li>Table: <em>asset</em></li>
 <li>Class: <em>com.dw.athena.model.Asset</em></li>
 </ul>
-<table style="width:100%;">
+<div class="table-wrap"><table style="width:100%;">
 <colgroup>
 <col style="width: 22%"/>
 <col style="width: 19%"/>
@@ -8215,7 +8506,7 @@ false.</td>
 <td><a href="#user">User</a>, who archived current asset.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -8232,7 +8523,7 @@ false.</td>
 <li>Table: <em>bank_account</em></li>
 <li>Class: <em>com.dw.athena.model.BankAccount</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -8508,7 +8799,7 @@ false.</td>
 <td>bank_id</td>
 <td>VARCHAR(50)</td>
 <td>bank</td>
-<td><a href="entity-compnay.md">Company</a></td>
+<td><a href="#company">Company</a></td>
 <td>Company related to bankAccount</td>
 </tr>
 <tr class="even">
@@ -8623,7 +8914,7 @@ field.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 <tr class="even">
@@ -8665,7 +8956,7 @@ field.</td>
 <td></td>
 <td></td>
 <td>sloaDetails</td>
-<td><a href="entity-sloa-detail.md">SloaDetail</a></td>
+<td><a href="#sloadetail">SloaDetail</a></td>
 <td>Sloa detail of funding accounts</td>
 </tr>
 <tr class="even">
@@ -8711,12 +9002,12 @@ field.</td>
 <td>Allow 2 fractional number</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-11">Enums</h4>
-<table>
+<h4 id="enums-12">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -8736,7 +9027,7 @@ EQUIPMENT_LINE, HOME_EQUITY_LOC, LEASE, MORTGAGE_ADJ_RATE,
 MORTGAGE_FIX_RATE, STOCK_SEC_LOC, UNSEC_LOC, WORK_CAP_LOC, LOAN</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-43">Description</h4>
 <ul>
 <li>Placeholder for bank account entity description.</li>
@@ -8750,7 +9041,7 @@ MORTGAGE_FIX_RATE, STOCK_SEC_LOC, UNSEC_LOC, WORK_CAP_LOC, LOAN</td>
 <li>Table: <em>sloa_detail</em></li>
 <li>Class: <em>com.dw.athena.model.SloaDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -8828,14 +9119,14 @@ MORTGAGE_FIX_RATE, STOCK_SEC_LOC, UNSEC_LOC, WORK_CAP_LOC, LOAN</td>
 <td>investment_fund_id</td>
 <td>VARCHAR(50)</td>
 <td>fund</td>
-<td><a href="entity-investment-fund.md">InvestmentFund</a></td>
+<td><a href="#investmentfund">InvestmentFund</a></td>
 <td>InvestmentFund reference</td>
 </tr>
 <tr class="even">
 <td>wire_instruction_id</td>
 <td>VARCHAR(50)</td>
 <td>wireInstruction</td>
-<td><a href="entity-lp-wire-instruction.md">LpWireInstruction</a></td>
+<td><a href="#lpwireinstruction">LpWireInstruction</a></td>
 <td>LpWireInstruction reference.</td>
 </tr>
 <tr class="odd">
@@ -8867,7 +9158,7 @@ MORTGAGE_FIX_RATE, STOCK_SEC_LOC, UNSEC_LOC, WORK_CAP_LOC, LOAN</td>
 <td>Archived notes.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -8884,7 +9175,7 @@ MORTGAGE_FIX_RATE, STOCK_SEC_LOC, UNSEC_LOC, WORK_CAP_LOC, LOAN</td>
 <li>Table: <em>beneficiary</em></li>
 <li>Class: <em>com.dw.athena.model.Beneficiary</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9013,12 +9304,12 @@ contactName/contact/company isn’t specified.</td>
 BeneficiaryType is <code>CONTACT</code>.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-12">Enums</h4>
-<table>
+<h4 id="enums-13">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -9031,7 +9322,7 @@ BeneficiaryType is <code>CONTACT</code>.</td>
 <td>TEXT, CONTACT, COMPANY, LEGAL_ENTITY</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-45">Description</h4>
 <ul>
 <li>Placeholder for beneficiary entity description.</li>
@@ -9045,7 +9336,7 @@ BeneficiaryType is <code>CONTACT</code>.</td>
 <li>Table: <em>governance</em></li>
 <li>Class: <em>com.dw.athena.model.Governance</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9162,12 +9453,12 @@ response for contact or managerEntity.</td>
 <code>contact</code>.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-13">Enums</h4>
-<table>
+<h4 id="enums-14">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -9186,7 +9477,7 @@ ASSISTANT_SECRETARY, TREASURER, MANAGER, MANAGING_MEMBER,
 AUTHORIZED_AGENT, ACCOUNT_HOLDER, SUCCESSOR</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-46">Description</h4>
 <ul>
 <li>Placeholder for governance entity description.</li>
@@ -9200,7 +9491,7 @@ AUTHORIZED_AGENT, ACCOUNT_HOLDER, SUCCESSOR</td>
 <li>Table: <em>grant</em></li>
 <li>Class: <em>com.dw.athena.model.Grant</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9389,12 +9680,12 @@ payment.</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-14">Enums</h4>
-<table>
+<h4 id="enums-15">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -9411,7 +9702,7 @@ payment.</td>
 <td>ONE_TIME, MULTI_YEAR, CUSTOM</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-47">Description</h4>
 <ul>
 <li>When API to create/update/delete grant is invoked.</li>
@@ -9427,7 +9718,7 @@ update.</li>
 <li>Table: <em>grant_payment</em></li>
 <li>Class: <em>com.dw.athena.model.GrantPayment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9654,12 +9945,12 @@ one-time grant.</td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-15">Enums</h4>
-<table>
+<h4 id="enums-16">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -9677,7 +9968,7 @@ one-time grant.</td>
 INVESTMENT_FUND, IN_KIND, IRA_RMD, CREDIT_CARD</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-48">Description</h4>
 <ul>
 <li>When API to create/update/delete grant payment is invoked.</li>
@@ -9692,7 +9983,7 @@ update.</li>
 <li>Table: <em>project</em></li>
 <li>Class: <em>com.dw.athena.model.Project</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9788,7 +10079,7 @@ update.</li>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -9806,7 +10097,7 @@ update.</li>
 <li>Table: <em>recurring_payment</em></li>
 <li>Class: <em>com.dw.athena.model.RecurringPayment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -9923,7 +10214,7 @@ update.</li>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -9941,7 +10232,7 @@ update.</li>
 <li>Table: <em>payment_lot</em></li>
 <li>Class: <em>com.dw.athena.model.GrantPayment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10025,7 +10316,7 @@ update.</li>
 <code>grantPayment</code> is available.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -10043,7 +10334,7 @@ update.</li>
 <li>Table: <em>grant</em></li>
 <li>Class: <em>com.dw.athena.model.SimpleGrant extends Grant</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10065,11 +10356,11 @@ update.</li>
 <td>grant_payment_id</td>
 <td>VARCHAR(50)</td>
 <td>grantPayment</td>
-<td><a href="entity-grantpayment.md">GrantPayment</a></td>
+<td><a href="#grantpayment">GrantPayment</a></td>
 <td>GrantPayment related to simpleGrant</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -10103,7 +10394,7 @@ when the entity is updated.</li>
 <li>Table: <em>tax_return</em></li>
 <li>Class: <em>com.dw.athena.model.TaxReturn</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10266,14 +10557,14 @@ type is SSN.</td>
 <td><strong>tax_form_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>taxForm</td>
-<td><a href="entity-taxform.md">TaxForm</a></td>
+<td><a href="#taxform">TaxForm</a></td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
 <td>components</td>
-<td>Set&lt;<a href="entity-taxcomponent.md">TaxComponent</a>&gt;</td>
+<td>Set&lt;<a href="#taxcomponent">TaxComponent</a>&gt;</td>
 <td>TaxComponents related to taxReturn. It is bi-directional
 relationship.</td>
 </tr>
@@ -10281,7 +10572,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>taxReturnDetails</td>
-<td>Set&lt;<a href="entity-taxreturndetail.md">TaxReturnDetail</a>&gt;</td>
+<td>Set&lt;<a href="#taxreturndetail">TaxReturnDetail</a>&gt;</td>
 <td>TaxReturnDetails related to taxReturn. It is bi-directional
 relationship.</td>
 </tr>
@@ -10317,7 +10608,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>componentsSummary</td>
-<td>Set&lt;<a href="entity-componentssummary.md">ComponentsSummary</a>&gt;</td>
+<td>Set&lt;<a href="#componentssummary">ComponentsSummary</a>&gt;</td>
 <td>Transient field</td>
 </tr>
 <tr class="odd">
@@ -10331,7 +10622,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field</td>
 </tr>
 <tr class="odd">
@@ -10357,12 +10648,12 @@ Name)”</td>
 <td>Transient field. For internal use.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-16">Enums</h4>
-<table>
+<h4 id="enums-17">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -10387,7 +10678,7 @@ Name)”</td>
 <td><code>EIN</code>, <code>SSN</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-53">Description</h4>
 <h6 id="when-created-4">When created</h6>
 <ul>
@@ -10416,7 +10707,7 @@ entity is updated.</li>
 <li>Table: <em>tax_return_detail</em></li>
 <li>Class: <em>com.dw.athena.model.TaxReturnDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10712,7 +11003,7 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>distributionPartners</td>
-<td>Set&lt;<a href="entity-taxdistributionpartner.md">TaxDistributionPartner</a>&gt;</td>
+<td>Set&lt;<a href="#taxdistributionpartner">TaxDistributionPartner</a>&gt;</td>
 <td>Applicable to Tax form <code>1065</code> only. It is bi-directional
 relationship.</td>
 </tr>
@@ -10720,17 +11011,17 @@ relationship.</td>
 <td></td>
 <td></td>
 <td>payments</td>
-<td>Set&lt;<a href="entity-taxreturnpayment.md">TaxReturnPayment</a>&gt;</td>
+<td>Set&lt;<a href="#taxreturnpayment">TaxReturnPayment</a>&gt;</td>
 <td>TaxReturnPayment related to taxReturnDetail. It is bi-directional
 relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-17">Enums</h4>
-<table>
+<h4 id="enums-18">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -10747,7 +11038,7 @@ relationship.</td>
 <td>FEDERAL, STATE</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-54">Description</h4>
 <h6 id="when-created-5">When created</h6>
 <ul>
@@ -10776,7 +11067,7 @@ entity is updated.</li>
 <li>Table: <em>tax_return_dependency</em></li>
 <li>Class: <em>com.dw.athena.model.TaxReturnDependency</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10819,14 +11110,14 @@ entity is updated.</li>
 <td><strong>tax_form_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>taxForm</td>
-<td><a href="entity-taxform.md">TaxForm</a></td>
+<td><a href="#taxform">TaxForm</a></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td><strong>tax_return_detail_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>taxReturnDetail</td>
-<td><a href="entity-taxreturndetail.md">TaxReturnDetail</a></td>
+<td><a href="#taxreturndetail">TaxReturnDetail</a></td>
 <td></td>
 </tr>
 <tr class="even">
@@ -10851,7 +11142,7 @@ entity is updated.</li>
 <td>Transient field</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -10871,7 +11162,7 @@ entity is updated.</li>
 <li>Table: <em>tax_return_payment</em></li>
 <li>Class: <em>com.dw.athena.model.TaxReturnPayment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -10998,16 +11289,16 @@ entity is updated.</li>
 <td><strong>tax_return_detail_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>taxReturnDetail</td>
-<td><a href="entity-taxreturndetail.md">TaxReturnDetail</a></td>
+<td><a href="#taxreturndetail">TaxReturnDetail</a></td>
 <td>id of a tax return detail for which this payment is made</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-18">Enums</h4>
-<table>
+<h4 id="enums-19">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -11024,7 +11315,7 @@ entity is updated.</li>
 <td>PENDING, INFO_SENT, PAID</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-56">Description</h4>
 <ul>
 <li>Placeholder for tax return payment entity description.</li>
@@ -11038,7 +11329,7 @@ entity is updated.</li>
 <li>Table: <em>tax_component</em></li>
 <li>Class: <em>com.dw.athena.model.TaxComponent</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11211,7 +11502,7 @@ created</td>
 <td>tax_return_detail_id</td>
 <td>VARCHAR(50)</td>
 <td>taxReturnDetail</td>
-<td><a href="entity-taxreturndetail.md">TaxReturn</a></td>
+<td><a href="#taxreturndetail">TaxReturn</a></td>
 <td>id of an tax return detail for which this particular tax component
 is created</td>
 </tr>
@@ -11293,9 +11584,9 @@ is created</td>
 <td>check that ira component is applicable or not.</td>
 </tr>
 </tbody>
-</table>
-<h4 id="enums-19">Enums</h4>
-<table>
+</table></div>
+<h4 id="enums-20">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -11312,7 +11603,7 @@ is created</td>
 <td>NORMAL, PARNETSHIP, TRUST, FUND, BANK_ACCOUNT</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -11329,7 +11620,7 @@ is created</td>
 <li>Table: <em>tax_distribution_partner</em></li>
 <li>Class: <em>com.dw.athena.model.TaxDistributionPartner</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11395,18 +11686,18 @@ specified.</td>
 <td><strong>tax_return_detail_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>taxReturnDetail</td>
-<td><a href="entity-taxreturndetail.md">TaxReturnDetail</a></td>
+<td><a href="#taxreturndetail">TaxReturnDetail</a></td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -11423,7 +11714,7 @@ specified.</td>
 <li>Table: <em>tax_form</em></li>
 <li>Class: <em>com.dw.athena.model.TaxForm</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11518,7 +11809,7 @@ in <code>yyyy-mm-dd</code> format.</td>
 <td></td>
 <td></td>
 <td>sections</td>
-<td>Set&lt;<a href="entity-taxformsection.md">TaxFormSection</a>&gt;</td>
+<td>Set&lt;<a href="#taxformsection">TaxFormSection</a>&gt;</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -11529,7 +11820,7 @@ in <code>yyyy-mm-dd</code> format.</td>
 <td>transient field</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -11549,7 +11840,7 @@ in <code>yyyy-mm-dd</code> format.</td>
 <li>Table: <em>tax_form_section</em></li>
 <li>Class: <em>com.dw.athena.model.TaxFormSection</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11608,7 +11899,7 @@ name.</td>
 <td><strong>tax_form_id</strong></td>
 <td>VARCHAR(36)</td>
 <td>form</td>
-<td><a href="entity-taxform.md">TaxForm</a></td>
+<td><a href="#taxform">TaxForm</a></td>
 <td>Tax form to which a particular section is belongs to.</td>
 </tr>
 <tr class="odd">
@@ -11619,7 +11910,7 @@ name.</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -11636,7 +11927,7 @@ name.</td>
 <li>Table: <em>tax_filling</em></li>
 <li>Class: <em>com.dw.athena.model.TaxFilling</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11718,7 +12009,7 @@ name.</td>
 <td></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -11735,7 +12026,7 @@ name.</td>
 <li>Table: <em>gift</em></li>
 <li>Class: <em>com.dw.athena.model.Gift</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -11949,7 +12240,7 @@ trust</td>
 <td></td>
 <td></td>
 <td>paymentLots</td>
-<td>Set&lt;<a href="entity-paymentlot.md">PaymentLot</a>&gt;</td>
+<td>Set&lt;<a href="#paymentlot">PaymentLot</a>&gt;</td>
 <td>It is bi-directional relationship. when
 <code>type=PUBLIC_STOCK / PRIVATE_STOCK</code></td>
 </tr>
@@ -11957,21 +12248,21 @@ trust</td>
 <td></td>
 <td></td>
 <td>giftorAllocation</td>
-<td>Set&lt;<a href="entity-giftallocation.md">GiftAllocation</a>&gt;</td>
+<td>Set&lt;<a href="#giftallocation">GiftAllocation</a>&gt;</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
 <td>recipientAllocation</td>
-<td>Set&lt;<a href="entity-giftallocation.md">GiftAllocation</a>&gt;</td>
+<td>Set&lt;<a href="#giftallocation">GiftAllocation</a>&gt;</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 <tr class="odd">
@@ -12010,12 +12301,12 @@ trust</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-20">Enums</h4>
-<table>
+<h4 id="enums-21">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -12037,7 +12328,7 @@ INVESTMENT_FUND</td>
 <td>CONTACT, INDIVIDUAL, JOINT, TRUST</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-62">Description</h4>
 <ul>
 <li>Placeholder for gift entity description.</li>
@@ -12051,7 +12342,7 @@ INVESTMENT_FUND</td>
 <li>Table: <em>gift_allocation</em></li>
 <li>Class: <em>com.dw.athena.model.GiftAllocation</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12141,7 +12432,7 @@ INVESTMENT_FUND</td>
 bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12158,7 +12449,7 @@ bi-directional relation.</td>
 <li>Table: <em>gift_distribution</em></li>
 <li>Class: <em>com.dw.athena.model.GiftDistribution</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12226,7 +12517,7 @@ bi-directional relation.</td>
 <td>Gift related to gift-distribution.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12243,7 +12534,7 @@ bi-directional relation.</td>
 <li>Table: <em>gift_allocation_detail</em></li>
 <li>Class: <em>com.dw.athena.model.GiftAllocationDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12316,18 +12607,18 @@ gift.</td>
 <td>gift_allocation_id</td>
 <td>VARCHAR(50)</td>
 <td>giftAllocation</td>
-<td><a href="entity-giftallocation.md">GiftAllocation</a></td>
+<td><a href="#giftallocation">GiftAllocation</a></td>
 <td>GiftAllocation related to GiftAllocationDetail.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12344,7 +12635,7 @@ gift.</td>
 <li>Table: <em>insurance</em></li>
 <li>Class: <em>com.dw.athena.model.Insurance</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12474,7 +12765,7 @@ field will be updated.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field</td>
 </tr>
 <tr class="odd">
@@ -12485,12 +12776,12 @@ field will be updated.</td>
 <td>Transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-21">Enums</h4>
-<table>
+<h4 id="enums-22">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -12503,7 +12794,7 @@ field will be updated.</td>
 <td>LIFE_INSURANCE, HEALTH_INSURANCE, PROPERTY_AND_CASUALTY</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-66">Description</h4>
 <ul>
 <li>Placeholder for insurance entity description.</li>
@@ -12517,7 +12808,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.InsuranceRenewal</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12662,7 +12953,7 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12679,7 +12970,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.Homeowner extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12712,7 +13003,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12729,7 +13020,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.Vehicle extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12832,7 +13123,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12849,7 +13140,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.Watercraft extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12889,7 +13180,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12906,7 +13197,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.ValuableArticle extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -12928,11 +13219,11 @@ field will be updated.</td>
 <td></td>
 <td></td>
 <td>articlePolicyLimits</td>
-<td>Set&lt;<a href="entity-articlepolicylimit.md">ArticlePolicyLimit</a>&gt;</td>
+<td>Set&lt;<a href="#articlepolicylimit">ArticlePolicyLimit</a>&gt;</td>
 <td>It is transiant field of ArticlePolicyLimit.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -12949,7 +13240,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.ExcessLiability extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13017,7 +13308,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13034,7 +13325,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.CatastrophicEvent extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13102,7 +13393,7 @@ field will be updated.</td>
 <td></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13119,7 +13410,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.WorkerCompensation extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13159,7 +13450,7 @@ field will be updated.</td>
 <td></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13176,7 +13467,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.SmallBusiness extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13216,7 +13507,7 @@ field will be updated.</td>
 <td></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13233,7 +13524,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.Aircraft extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13304,11 +13595,11 @@ field will be updated.</td>
 <td></td>
 <td></td>
 <td>aircraftCoverages</td>
-<td>List&lt;<a href="entity-aircraftcoverage.md">AircraftCoverage</a>&gt;</td>
+<td>List&lt;<a href="#aircraftcoverage">AircraftCoverage</a>&gt;</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13325,7 +13616,7 @@ field will be updated.</td>
 <li>Table: <em>aircraft_coverage</em></li>
 <li>Class: <em>com.dw.athena.model.AircraftCoverage</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13389,11 +13680,11 @@ field will be updated.</td>
 <td><strong>insurance_renewal_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>aircraft</td>
-<td><a href="entity-aircraft.md">Aircraft</a></td>
+<td><a href="#aircraft">Aircraft</a></td>
 <td>Aircraft related to aircraft coverage.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13410,7 +13701,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.OtherInsurance extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13436,7 +13727,7 @@ field will be updated.</td>
 <td></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13453,7 +13744,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.TermLife extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13486,7 +13777,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13501,9 +13792,9 @@ field will be updated.</td>
 <h2 id="wholelife">WholeLife</h2>
 <ul>
 <li>Table: <em>insurance_renewal</em></li>
-<li>Class: <em>com.dw.athena.model.WholeLife extends <a href="entity-termlife.md">TermLife</a></em></li>
+<li>Class: <em>com.dw.athena.model.WholeLife extends <a href="#termlife">TermLife</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13529,7 +13820,7 @@ field will be updated.</td>
 <td>cashValue of this whole life insurance.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13544,9 +13835,9 @@ field will be updated.</td>
 <h2 id="longtermcare">LongTermCare</h2>
 <ul>
 <li>Table: <em>insurance_renewal</em></li>
-<li>Class: <em>com.dw.athena.model.LongTermCare extends <a href="entity-termlife.md">TermLife</a></em></li>
+<li>Class: <em>com.dw.athena.model.LongTermCare extends <a href="#termlife">TermLife</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13572,7 +13863,7 @@ field will be updated.</td>
 <td>benefitPeriod of this long term care insurance.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13589,7 +13880,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.Medicare extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13622,7 +13913,7 @@ field will be updated.</td>
 <td>medicarePartB of this medicare insurance.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13640,7 +13931,7 @@ field will be updated.</td>
 <li>Table: <em>insurance_renewal</em></li>
 <li>Class: <em>com.dw.athena.model.MedicareSupplement extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13659,7 +13950,7 @@ field will be updated.</td>
 </thead>
 <tbody>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13676,7 +13967,7 @@ field will be updated.</td>
 <li>Table: <em>recreational_vehicle</em></li>
 <li>Class: <em>com.dw.athena.model.RecreationalVehicle extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13779,7 +14070,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13796,7 +14087,7 @@ field will be updated.</td>
 <li>Table: <em>motorcycle</em></li>
 <li>Class: <em>com.dw.athena.model.Motorcycle extends <a href="#insurancerenewal">InsuranceRenewal</a></em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13850,7 +14141,7 @@ field will be updated.</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -13867,7 +14158,7 @@ field will be updated.</td>
 <li>Table: <em>investment</em></li>
 <li>Class: <em>com.dw.athena.model.Investment</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -13980,11 +14271,11 @@ field will be updated.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -14001,7 +14292,7 @@ field will be updated.</td>
 <li>Table: <em>investment_workspace</em></li>
 <li>Class: <em>com.dw.athena.model.InvestmentWorkspace</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -14132,13 +14423,13 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspacepreference">WorkspacePreference</h2>
 <ul>
 <li>Table: <em>workspace_preference</em></li>
 <li>Class: <em>com.dw.athena.workspace.WorkspacePreference</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -14276,13 +14567,13 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspacesuitability">WorkspaceSuitability</h2>
 <ul>
 <li>Table: <em>workspace_suitability</em></li>
 <li>Class: <em>com.dw.athena.workspace.WorkspaceSuitability</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 18%"/>
 <col style="width: 15%"/>
@@ -14504,9 +14795,9 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="workspacesuitabilitybasic">WorkspaceSuitabilityBasic</h4>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 18%"/>
 <col style="width: 15%"/>
@@ -14567,13 +14858,13 @@ field will be updated.</td>
 <td>LegalEntity related to this cash flow.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspacetaxdetail">WorkspaceTaxDetail</h2>
 <ul>
 <li>Table: <em>workspace_tax_detail</em></li>
 <li>Class: <em>com.dw.athena.workspace.WorkspaceTaxDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -14648,7 +14939,7 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspacediscretion">WorkspaceDiscretion</h2>
 <ul>
 <li>Table: <em>workspace_discretion</em></li>
@@ -14656,7 +14947,7 @@ field will be updated.</td>
 <li><strong>Notes</strong> : Now This section shows as
 <code>Communication Expectations</code> in the Workspace.</li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -14815,13 +15106,13 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspacetaxdetail-1">WorkspaceTaxDetail</h2>
 <ul>
 <li>Table: <em>workspace_cashflow</em></li>
 <li>Class: <em>com.dw.athena.workspace.WorkspaceTaxDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 18%"/>
 <col style="width: 15%"/>
@@ -14917,14 +15208,14 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="workspaceportfolioconstruction">WorkspacePortfolioConstruction</h2>
 <ul>
 <li>Table: <em>workspace_portfolio_construction</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.WorkspacePortfolioConstruction</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15048,14 +15339,14 @@ field will be updated.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfoliopreservationallocation">PortfolioPreservationAllocation</h4>
 <ul>
 <li>Table: <em>preservation_allocation</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioPreservationAllocation</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15102,14 +15393,14 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfolioliquiditybucket">PortfolioLiquidityBucket</h4>
 <ul>
 <li>Table: <em>liquidity_bucket</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioLiquidityBucket</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15156,14 +15447,14 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfoliostabilitybucket">PortfolioStabilityBucket</h4>
 <ul>
 <li>Table: <em>stability_bucket</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioStabilityBucket</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15210,14 +15501,14 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfoliodiversificationbucket">PortfolioDiversificationBucket</h4>
 <ul>
 <li>Table: <em>diversification_bucket</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioDiversificationBucket</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15264,14 +15555,14 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfolioliquidgrowthbucket">PortfolioLiquidGrowthBucket</h4>
 <ul>
 <li>Table: <em>liquid_growth_bucket</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioLiquidGrowthBucket</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15318,14 +15609,14 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="portfolioilliquidgrowthbucket">PortfolioIlliquidGrowthBucket</h4>
 <ul>
 <li>Table: <em>illiquid_growth_bucket</em></li>
 <li>Class:
 <em>com.dw.athena.workspace.PortfolioIlliquidGrowthBucket</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15372,9 +15663,9 @@ field will be updated.</td>
 <td>Portfolio construction related to this.</td>
 </tr>
 </tbody>
-</table>
-<h4 id="enums-22">Enums</h4>
-<table>
+</table></div>
+<h4 id="enums-23">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 38%"/>
 <col style="width: 61%"/>
@@ -15414,7 +15705,7 @@ TAXABLE_BONGS_ESG, TAX_SENSITIVE_CONSERVATIVE, NA</td>
 ESG_NO_ACTIVE, SMALL_PORTFOLIO, LOW_TRACKING_ERROR, BARBELL, NA</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-87">Description</h4>
 <ul>
 <li>Placeholder for investment workspace entity description.</li>
@@ -15428,7 +15719,7 @@ ESG_NO_ACTIVE, SMALL_PORTFOLIO, LOW_TRACKING_ERROR, BARBELL, NA</td>
 <li>Table: <em>incentive_stock</em></li>
 <li>Class: <em>com.dw.athena.model.IncentiveStock</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15520,7 +15811,7 @@ ESG_NO_ACTIVE, SMALL_PORTFOLIO, LOW_TRACKING_ERROR, BARBELL, NA</td>
 <td></td>
 <td></td>
 <td>grants</td>
-<td>List&lt;<a href="entity-incentivegrant.md">IncentiveGrant</a>&gt;</td>
+<td>List&lt;<a href="#incentivegrant">IncentiveGrant</a>&gt;</td>
 <td>Transient field. Represent incentive grants of this
 incentive-stock.</td>
 </tr>
@@ -15528,11 +15819,11 @@ incentive-stock.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -15549,7 +15840,7 @@ incentive-stock.</td>
 <li>Table: <em>incentive_grant</em></li>
 <li>Class: <em>com.dw.athena.model.IncentiveGrant</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15760,7 +16051,7 @@ incentive-stock.</td>
 <td><strong>incentive_stock_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>IncentiveStock</td>
-<td><a href="entity-incentivestock.md">IncentiveStock</a></td>
+<td><a href="#incentivestock">IncentiveStock</a></td>
 <td>Incentive-stock related to Incentive-grant.</td>
 </tr>
 <tr class="odd">
@@ -15795,17 +16086,17 @@ incentive-stock.</td>
 <td></td>
 <td></td>
 <td>vestingSchedules</td>
-<td>List&lt;<a href="entity-vestingschedule.md">VestingSchedule</a>&gt;</td>
+<td>List&lt;<a href="#vestingschedule">VestingSchedule</a>&gt;</td>
 <td>Transient field. Represent VestingSchedule of this
 incentive-grant.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-23">Enums</h4>
-<table>
+<h4 id="enums-24">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -15830,7 +16121,7 @@ incentive-grant.</td>
 <td>ANNUAL, MONTHLY, QUARTERLY</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-89">Description</h4>
 <ul>
 <li>Placeholder for incentive grant entity description.</li>
@@ -15844,7 +16135,7 @@ incentive-grant.</td>
 <li>Table: <em>vesting_schedule</em></li>
 <li>Class: <em>com.dw.athena.model.VestingSchedule</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -15894,7 +16185,7 @@ incentive-grant.</td>
 <td><strong>grant_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>grant</td>
-<td><a href="entity-incentivegrant.md">IncentiveGrant</a></td>
+<td><a href="#incentivegrant">IncentiveGrant</a></td>
 <td>Incentive-grant related to VestingSchedule.</td>
 </tr>
 <tr class="even">
@@ -15929,23 +16220,23 @@ incentive-grant.</td>
 <td>vested_detail_id</td>
 <td>VARCHAR(50)</td>
 <td>vestedDetail</td>
-<td><a href="entity-vesteddetail.md">VestedDetail</a></td>
+<td><a href="#vesteddetail">VestedDetail</a></td>
 <td>VestedDetail for the VestingSchedule.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
 <td>exercises</td>
-<td>List&lt;<a href="entity-exercise.md">Exercise</a>&gt;</td>
+<td>List&lt;<a href="#exercise">Exercise</a>&gt;</td>
 <td>Transient field. Represent Exercise of this VestingSchedule.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-24">Enums</h4>
-<table>
+<h4 id="enums-25">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -15958,7 +16249,7 @@ incentive-grant.</td>
 <td>ACCELERATED, FORFEITED, EXCHANGED, VESTED, EXERCISED</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-90">Description</h4>
 <ul>
 <li>Placeholder for vesting schedule entity description.</li>
@@ -15972,7 +16263,7 @@ incentive-grant.</td>
 <li>Table: <em>vested_detail</em></li>
 <li>Class: <em>com.dw.athena.model.VestedDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16054,12 +16345,12 @@ incentive-grant.</td>
 <td>giftPercentage of VestedDetail.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-25">Enums</h4>
-<table>
+<h4 id="enums-26">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -16072,7 +16363,7 @@ incentive-grant.</td>
 <td>GIFT, SELL</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-91">Description</h4>
 <ul>
 <li>Placeholder for vested detail entity description.</li>
@@ -16086,7 +16377,7 @@ incentive-grant.</td>
 <li>Table: <em>exercise</em></li>
 <li>Class: <em>com.dw.athena.model.Exercise</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16185,11 +16476,11 @@ incentive-grant.</td>
 <td><strong>schedule_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>schedule</td>
-<td><a href="entity-VestingSchedule.md">VestingSchedule</a></td>
+<td><a href="#vestingschedule">VestingSchedule</a></td>
 <td>VestingSchedule related to exercise.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -16206,7 +16497,7 @@ incentive-grant.</td>
 <li>Table: <em>ips</em></li>
 <li>Class: <em>com.dw.athena.model.Ips</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16361,25 +16652,25 @@ incentive-grant.</td>
 <td>ips_asset_allocation_id</td>
 <td>VARCHAR(50)</td>
 <td>ipsAssetAllocation</td>
-<td><a href="entity-ipsAssetAllocation.md">IpsAssetAllocation</a></td>
+<td><a href="#ipsassetallocation">IpsAssetAllocation</a></td>
 <td>Ips asset allocation of IPS.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field</td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
 <td>accountEntities</td>
-<td>List&lt;<a href="entity-ipsAccountEntity.md">IpsAccountEntity</a>&gt;</td>
+<td>List&lt;<a href="#ipsaccountentity">IpsAccountEntity</a>&gt;</td>
 <td>It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -16396,7 +16687,7 @@ incentive-grant.</td>
 <li>Table: <em>ips_account_entity</em></li>
 <li>Class: <em>com.dw.athena.model.IpsAccountEntity</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16481,11 +16772,11 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>accounts</td>
-<td>Set&lt;<a href="entity-ipsAccount.md">IpsAccount</a>&gt;</td>
+<td>Set&lt;<a href="#ipsaccount">IpsAccount</a>&gt;</td>
 <td>Accounts of account entity. It is bi-directional relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -16502,7 +16793,7 @@ incentive-grant.</td>
 <li>Table: <em>ips_account</em></li>
 <li>Class: <em>com.dw.athena.model.IpsAccount</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16615,11 +16906,11 @@ incentive-grant.</td>
 <td><strong>ips_account_entity_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>ipsAccountEntity</td>
-<td><a href="entity-ipsAccountEntity.md">IpsAccountEntity</a></td>
+<td><a href="#ipsaccountentity">IpsAccountEntity</a></td>
 <td>Ips Account entity related to the account.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -16636,7 +16927,7 @@ incentive-grant.</td>
 <li>Table: <em>ips_asset_allocation</em></li>
 <li>Class: <em>com.dw.athena.model.IpsAssetAllocation</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 14%"/>
 <col style="width: 17%"/>
@@ -16746,12 +17037,12 @@ incentive-grant.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-26">Enums</h4>
-<table>
+<h4 id="enums-27">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -16764,7 +17055,7 @@ incentive-grant.</td>
 <td>DOLLAR, PERCENT</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-96">Description</h4>
 <ul>
 <li>Placeholder for ips asset allocation entity description.</li>
@@ -16778,7 +17069,7 @@ incentive-grant.</td>
 <li>Table: <em>ips_group_summary</em></li>
 <li>Class: <em>com.dw.athena.model.IpsGroupSummary</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16860,7 +17151,7 @@ incentive-grant.</td>
 <td>transient field.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -16877,7 +17168,7 @@ incentive-grant.</td>
 <li>Table: <em>estate_will</em></li>
 <li>Class: <em>com.dw.athena.model.EstateWill</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -16997,7 +17288,7 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>codicils</td>
-<td>Set&lt;<a href="entity-codicil.md">Codicil</a>&gt;</td>
+<td>Set&lt;<a href="#codici">Codicil</a>&gt;</td>
 <td>It is bi-directional.</td>
 </tr>
 <tr class="even">
@@ -17039,7 +17330,7 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>bequests</td>
-<td>Set&lt;<a href="entity-specificbequest.md">SpecificBequest</a>&gt;</td>
+<td>Set&lt;<a href="#specificbequest">SpecificBequest</a>&gt;</td>
 <td>It is bi-directional.</td>
 </tr>
 <tr class="even">
@@ -17050,7 +17341,7 @@ incentive-grant.</td>
 <td>It is bi-directional.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -17067,7 +17358,7 @@ incentive-grant.</td>
 <li>Table: <em>estate_trust</em></li>
 <li>Class: <em>com.dw.athena.model.EstateTrust</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17152,11 +17443,11 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>wills</td>
-<td>Set&lt;<a href="entity-estatewill.md">EstateWill</a>&gt;</td>
+<td>Set&lt;<a href="#estatewill">EstateWill</a>&gt;</td>
 <td>It is bi-directional relationship.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -17173,7 +17464,7 @@ incentive-grant.</td>
 <li>Table: <em>report</em></li>
 <li>Class: <em>com.dw.athena.model.Report</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17265,11 +17556,11 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -17286,7 +17577,7 @@ incentive-grant.</td>
 <li>Table: <em>report_detail</em></li>
 <li>Class: <em>com.dw.athena.model.ReportDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 21%"/>
 <col style="width: 18%"/>
@@ -17434,23 +17725,23 @@ incentive-grant.</td>
 <td></td>
 <td></td>
 <td>legalEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass legal entity id in request.</td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
 <td>subEntityDto</td>
-<td><a href="dto-legalentity">LegalEntity</a></td>
+<td><a href="#legalentity">LegalEntity</a></td>
 <td>Transient field. Used to pass sub legal entity id in request.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-27">Enums</h4>
-<table>
+<h4 id="enums-28">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -17477,7 +17768,7 @@ INVESTMENTS, PHILANTHROPY, TAX,</td>
 PARTNERSHIP_DETAIL, CURRENT,</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <pre><code>TRANSFERRED, ACTIVE, DISPOSED, GIVEN, RECEIVED, LIFETIME_SUMMARY, GST_SUMMARY, WILL,
 DIRECTIVES, INSURANCE_SUMMARY, IPS, HISTORICAL_IPS, GRANT_MAKER_STATUS, GRANT_BY_SIZE,
 TAX_FILING, GRANT_DETAIL, APPROVED_GRANT_SCHEDULED, TAX_SUMMARY, ENTITY_STATUS,
@@ -17495,7 +17786,7 @@ TAX_RETURN_DETAIL, SUMMARY, INACTIVE_SUMMARY |</code></pre>
 <li>Table: <em>mailing_list</em></li>
 <li>Class: <em>com.dw.athena.model.MailingList</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17586,7 +17877,7 @@ lastName. it is case sensitive</td>
 relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -17603,7 +17894,7 @@ relation.</td>
 <li>Table: <em>view</em></li>
 <li>Class: <em>com.dw.athena.model.View</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17694,7 +17985,7 @@ lastName. it is case sensitive</td>
 relation.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -17711,7 +18002,7 @@ relation.</td>
 <li>Table: <em>fincen_reportings</em></li>
 <li>Class: <em>com.dw.athena.model.FincenReportings</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17793,12 +18084,12 @@ relation.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-28">Enums</h4>
-<table>
+<h4 id="enums-29">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -17812,7 +18103,7 @@ relation.</td>
 <code>BENEFICIAL_OWNER</code></td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-104">Description</h4>
 <ul>
 <li>Placeholder for fincen reportings entity description.</li>
@@ -17826,7 +18117,7 @@ relation.</td>
 <li>Table: <em>asa_detail</em></li>
 <li>Class: <em>com.dw.athena.model.AsaDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -17876,7 +18167,7 @@ relation.</td>
 <td><strong>asa_version_id</strong></td>
 <td>VARCHAR(50)</td>
 <td>asaVersion</td>
-<td><a href="entity-asa-version.md">AsaVersion</a></td>
+<td><a href="#asaversion">AsaVersion</a></td>
 <td>Reference of AsaVersion</td>
 </tr>
 <tr class="even">
@@ -17980,12 +18271,12 @@ mandatory.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-29">Enums</h4>
-<table>
+<h4 id="enums-30">Enums</h4>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 47%"/>
 <col style="width: 52%"/>
@@ -18003,7 +18294,7 @@ mandatory.</td>
 STANDARD</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-105">Description</h4>
 <ul>
 <li>Placeholder for asa detail entity description.</li>
@@ -18017,7 +18308,7 @@ STANDARD</td>
 <li>Table: <em>fee_detail</em></li>
 <li>Class: <em>com.dw.athena.model.FeeDetail</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -18193,12 +18484,12 @@ FeeSchedule=STANDARD.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-30">Enums</h4>
-<table>
+<h4 id="enums-31">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -18219,7 +18510,7 @@ FeeSchedule=STANDARD.</td>
 <td>PULL, INTERNAL_INVOICE, EXTERNAL_INVOICE</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-106">Description</h4>
 <ul>
 <li>Placeholder for fee detail entity description.</li>
@@ -18233,7 +18524,7 @@ FeeSchedule=STANDARD.</td>
 <li>Table: <em>fee_actual</em></li>
 <li>Class: <em>com.dw.athena.model.FeeActual</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -18357,12 +18648,12 @@ FeeSchedule=STANDARD.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-31">Enums</h4>
-<table>
+<h4 id="enums-32">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -18375,7 +18666,7 @@ FeeSchedule=STANDARD.</td>
 <td>FIXED, VARIABLE_AUM, MINIMUM</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -18392,7 +18683,7 @@ FeeSchedule=STANDARD.</td>
 <li>Table: <em>fee_budget</em></li>
 <li>Class: <em>com.dw.athena.model.FeeBudget</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -18481,12 +18772,12 @@ FeeSchedule=STANDARD.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
-<h4 id="enums-32">Enums</h4>
-<table>
+<h4 id="enums-33">Enums</h4>
+<div class="table-wrap"><table>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -18499,7 +18790,7 @@ FeeSchedule=STANDARD.</td>
 <td>FIXED, VARIABLE_AUM, MINIMUM</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h4 id="description-108">Description</h4>
 <ul>
 <li>Placeholder for fee budget entity description.</li>
@@ -18513,7 +18804,7 @@ FeeSchedule=STANDARD.</td>
 <li>Table: <em>fee_history</em></li>
 <li>Class: <em>com.dw.athena.model.FeeHistory</em></li>
 </ul>
-<table>
+<div class="table-wrap"><table>
 <colgroup>
 <col style="width: 15%"/>
 <col style="width: 13%"/>
@@ -18609,7 +18900,7 @@ FeeSchedule=STANDARD.</td>
 <td><a href="#user">User</a>, who updated this entity</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>Fields whose name is in <strong>bold</strong> are mandatory.</p>
 </blockquote>
@@ -18624,26 +18915,98 @@ FeeSchedule=STANDARD.</td>
 </div>
 </main>
 <script>
-(function buildTOC(){
-  const content = document.getElementById('content-card');
-  if(!content) return;
-  const toc = document.getElementById('toc');
-  const headings = content.querySelectorAll('h1,h2,h3,h4');
-  headings.forEach(h => {
-    if(!h.id) {
-      h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-');
-    }
-    const a = document.createElement('a');
-    a.href = '#'+h.id;
-    a.textContent = h.textContent;
-    if(h.tagName==='H2') a.className='sub';
-    if(h.tagName==='H3' || h.tagName==='H4') a.className='subsub';
-    toc.appendChild(a);
-  });
-})();
-
 document.getElementById('theme-toggle').addEventListener('click', function(){
   document.body.classList.toggle('dark');
+});
+</script>
+<script>
+</script>
+<script>
+// Multi-theme switcher
+const themeSelect = document.getElementById("theme-select");
+function applyTheme(t){
+  document.body.classList.remove("dark","sepia","solarized");
+  if(t !== "light") document.body.classList.add(t);
+  localStorage.setItem("theme", t);
+}
+themeSelect.onchange = () => applyTheme(themeSelect.value);
+const saved = localStorage.getItem("theme") || "light";
+applyTheme(saved);
+themeSelect.value = saved;
+</script>
+<script>
+ };
+document.getElementById("font-bigger").onclick = () => { scale = Math.min(1.6, scale + 0.1); applyScale(); };
+applyScale();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const printBtn = document.getElementById("print-btn");
+  if(printBtn){
+    printBtn.onclick = ()=> window.print();
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toc = document.getElementById("toc");
+  const content = document.getElementById("content-card");
+  if (!toc || !content) return;
+
+  toc.innerHTML = "";
+  const heads = content.querySelectorAll("h1,h2,h3,h4");
+
+  heads.forEach(h => {
+    if (!h.id) {
+      h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    }
+    const a = document.createElement("a");
+    a.href = "#" + h.id;
+    a.textContent = h.textContent;
+    if (h.tagName === "H2") a.classList.add("sub");
+    if (h.tagName === "H3" || h.tagName === "H4") a.classList.add("subsub");
+    toc.appendChild(a);
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const search = document.getElementById("site-search");
+  const links = document.querySelectorAll("#toc a");
+  search.addEventListener("input", () => {
+    const q = search.value.toLowerCase();
+    links.forEach(a => {
+      a.style.display = a.textContent.toLowerCase().includes(q) ? "block" : "none";
+    });
+  });
+});
+</script>
+
+<script>
+// Smooth active highlight updating
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("#toc a");
+  const heads = document.querySelectorAll("#content-card h1, #content-card h2, #content-card h3");
+
+  document.addEventListener("scroll", () => {
+    let current = null;
+    heads.forEach(h => {
+      if (h.getBoundingClientRect().top <= 120) current = h;
+    });
+    if (current) {
+      links.forEach(a => {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current.id);
+      });
+    }
+  });
+
+  // Smooth clicking scroll highlight fix
+  links.forEach(a => {
+    a.addEventListener("click", () => {
+      links.forEach(x => x.classList.remove("active"));
+      a.classList.add("active");
+    });
+  });
 });
 </script>
 </body>
